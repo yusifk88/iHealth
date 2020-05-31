@@ -8,6 +8,7 @@ import 'es6-promise/auto';
 import VueRouter from 'vue-router';
 import dashboardComponent from "./components/dashboardComponent";
 import loginComponent from "./components/loginComponent";
+import dispensaryComponent from './components/dispensaryComponent';
 import {store} from "./store";
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -21,6 +22,11 @@ window.Vue = require('vue');
 import Vuex from 'vuex'
 import patientComponent from "./components/patientComponent";
 import admissionComponent from "./components/admissionComponent";
+import opdviewComponent from "./components/partials/opdviewComponent";
+import newconsultingComponent from "./components/newconsultingComponent";
+import OPDComponent from "./components/partials/OPDComponent";
+import vitalsComponent from "./components/vitalsComponent";
+import labComponent from "./components/partials/labComponent";
 Vue.use(Vuetify);
 Vue.use(Vuex);
 
@@ -62,6 +68,12 @@ const routes = [
     },
 
     {
+        path:'/dispensary',
+        name:'dispensary',
+        component:dispensaryComponent,
+        meta: { requiresAuth: true }
+    },
+    {
         path:'/admit/:id',
         name:'admit',
         component:admissionComponent,
@@ -72,7 +84,33 @@ const routes = [
         name:'login',
         component:loginComponent,
         meta: { requiresAuth: false }
-    }
+    },
+    {
+        path:'/consulting/:id',
+        name:'consulting',
+        component:newconsultingComponent,
+        meta: { requiresAuth: false }
+    },
+
+    {
+        path:'/opd',
+        name:'opd',
+        component:opdviewComponent,
+        meta: { requiresAuth: false }
+    },
+    {
+        path:'/vitals/:id',
+        name:'vitals',
+        component:vitalsComponent,
+        meta: { requiresAuth: false }
+    },
+
+    {
+        path:'/lab/:id',
+        name:'lab',
+        component:labComponent,
+        meta: { requiresAuth: false }
+    },
 ];
 
 const router = new VueRouter({
@@ -113,15 +151,25 @@ const app = new Vue({
             mini_drawer: true,
             navs:[
                 {
+                    text:'Dasboard',
+                    icon:'mdi-dashboard',
+                    route:'/'
+                },
+                {
                     text:'Patients',
                     icon:'mdi-account-group',
                     route:'/patients'
                 },
+                {
+                    text:'Dispensary',
+                    icon:'mdi-pil',
+                    route:'/dispensary'
+                },
 
                 {
-                    text:'Admissions',
+                    text:'OPD',
                     icon:'mdi-book',
-                    route:'/adminssions'
+                    route:'/opd'
                 },
             ]
         }
@@ -146,6 +194,9 @@ const app = new Vue({
     },
 
     mounted(){
+    },
+
+  created() {
         this.check_user();
-    }
+  }
 });

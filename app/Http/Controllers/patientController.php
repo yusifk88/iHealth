@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Nationality;
+use App\OPD;
 use App\Patient;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -153,4 +154,20 @@ class patientController extends Controller
 
 
 }
+
+
+    public function getbyopd($id){
+
+        $opd = OPD::find($id);
+        $patient=Patient::find($opd->patient_id);
+        return response()->json($patient);
+
+    }
+
+    public function showopd($id){
+        $opd = OPD::find($id);
+        return response()->json($opd);
+    }
+
+
 }

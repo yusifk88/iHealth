@@ -23,7 +23,7 @@
             <v-card color="amber" dark>
                 <v-card-text>
 
-                    <h1>New Admission</h1>
+                    <h1>New Attendance</h1>
                 </v-card-text>
             </v-card>
         </v-timeline-item>
@@ -190,88 +190,6 @@
 
                   <OPDComponent></OPDComponent>
 
-
-
-                </div>
-                </v-card-text>
-            </v-card>
-        </v-timeline-item>
-
-
-        <v-timeline-item
-            large
-            right
-            icon="mdi-doctor"
-            color="red"
-        >
-            <template v-slot:opposite>
-        <span
-            O.P.D
-
-        ></span>
-            </template>
-            <v-card>
-                <v-card-text>
-                <h2 :class="`headline font-weight-light mb-4 red--text`">Consulting</h2>
-
-                <div>
-
-                    <h1>consulting form goes here</h1>
-
-                </div>
-                </v-card-text>
-            </v-card>
-        </v-timeline-item>
-
-        <v-timeline-item
-            large
-            right
-            icon="mdi-test-tube"
-            color="success"
-        >
-            <template v-slot:opposite>
-        <span
-
-
-        >
-            O.P.D
-        </span>
-            </template>
-            <v-card>
-                <v-card-text>
-                <h2 :class="`headline font-weight-light mb-4 green--text`">Laboratory</h2>
-
-                <div>
-
-                    <h1>Laboratory form goes here</h1>
-
-                </div>
-                </v-card-text>
-            </v-card>
-        </v-timeline-item>
-
-
-        <v-timeline-item
-            large
-            right
-            icon="mdi-pill"
-            color="purple"
-        >
-            <template v-slot:opposite>
-        <span
-            v-text="'OPD'"
-
-        >
-        </span>
-            </template>
-            <v-card>
-                <v-card-text>
-                <h2 :class="`headline font-weight-light mb-4 purple--text`">Dispensing</h2>
-
-                <div>
-
-                    <h1>dispensing form goes here</h1>
-
                 </div>
                 </v-card-text>
             </v-card>
@@ -285,9 +203,10 @@
 
 <script>
     import OPDComponent from "./partials/OPDComponent";
+    import ConsultingComponent from "./partials/consultingComponent";
     export default {
         name: "admissionComponent",
-        components: {OPDComponent},
+        components: {ConsultingComponent, OPDComponent},
         data(){
             return{
                 patient:{}

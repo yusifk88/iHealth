@@ -31,7 +31,18 @@
 
 
                     </v-col>
-                    <v-col cols="6" class="text-center" v-if="$store.state.patient">
+
+                    <v-col cols="12" sm='4'>
+                        <v-text-field
+                        type="text"
+                        label="CC Code"
+                        v-model="cc_code"
+                        outlined
+                        ></v-text-field>
+                    </v-col>
+
+
+                    <v-col cols="4" class="text-center" v-if="$store.state.patient">
                         <v-avatar>
                             <v-img src="/img/photo.png"></v-img>
                         </v-avatar> <br>
@@ -235,13 +246,17 @@
     import moment from 'moment';
     export default {
         name: "OPDComponent",
+        props:['attendanceId'],
         data(){
             return{
                 error_message:false,
                 error_msg:'',
+                success_msg:'',
+                success_message:false,
 
                 progress:false,
                 form_valid:false,
+                cc_code:'',
 
                 temperature:0,
                 temperature_remarks:'',
@@ -266,8 +281,6 @@
                     }
                 },
 
-
-
             }
 
         },
@@ -284,6 +297,7 @@
                     formdata.append('entry_date',this.entry_date);
                     formdata.append('temperature',this.temperature);
                     formdata.append('bp',this.bp);
+                    formdata.append('cc_code',this.cc_code);
                     formdata.append('weight',this.weight);
                     formdata.append('height',this.height);
                     formdata.append('pulse',this.pulse);
@@ -302,10 +316,8 @@
                                 path:'/admission/'+res.data.id
                             })
 
-
                         })
                     .catch(error=>{
-
                         this.progress =false;
                         if(error.response.status ==302){
                             this.error_msg = error.response.data;

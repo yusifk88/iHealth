@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\OPD;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OPDController extends Controller
 {
@@ -14,7 +15,9 @@ class OPDController extends Controller
      */
     public function index()
     {
-        //
+        $opd = OPD::all();
+
+        return response()->json($opd);
     }
 
     /**
@@ -85,7 +88,10 @@ class OPDController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        DB::statement("update opd set temperature = '$request->temperature',temperature_remarks='$request->temperature_remarks',bp='$request->bp',bp_remarks='$request->bp_remarks',height='$request->height',weight='$request->weight',weight_remarks='$request->weight_remarks',respiration='$request->respiration',respiration_remarks='$request->respiration_remarks',pulse='$request->pulse',pulse_remarks='$request->pulse_remarks' where id = '$id' ");
+
+
     }
 
     /**
