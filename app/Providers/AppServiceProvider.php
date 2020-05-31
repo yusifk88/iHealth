@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Consultance;
 use App\Drug;
+use App\Lab;
 use App\OPD;
 use App\Patient;
 use App\Prescrition;
@@ -34,7 +35,9 @@ class AppServiceProvider extends ServiceProvider
             $opd->consulting = Consultance::where('opd_id',$opd->id)->get()->first();
             $opd->consulting_status = Consultance::where('opd_id',$opd->id)->exists();
             $opd->dispensary_status = false;
-            $opd->lab_status = false;
+            $opd->lab_status = Lab::where('opd_id',$opd->id)->exists();
+            $opd->lab = Lab::where('opd_id',$opd->id)->first();
+
         });
 
     Prescrition::retrieved(function ($p){

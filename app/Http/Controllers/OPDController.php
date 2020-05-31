@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Lab;
 use App\OPD;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -104,4 +105,22 @@ class OPDController extends Controller
     {
         //
     }
+
+
+    public function savelab(Request $request){
+
+        $data = $request->all();
+        $data['user_id'] = $request->user()->id;
+
+        $lab = new Lab($data);
+        $lab->save();
+    }
+
+    public function changelab(Request $request, $id){
+
+        DB::statement("update lab set tests='$request->tests',results='$request->results' where id = '$id'");
+
+
+    }
+
 }

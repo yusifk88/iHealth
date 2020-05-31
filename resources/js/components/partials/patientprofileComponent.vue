@@ -137,7 +137,7 @@
             You are in editing mode, this record already exist
         </v-alert>
 
-        <v-alert type="warning" v-show="!editing">
+        <v-alert type="warning" v-show="!auth">
             Your user role is not allowed to edit this record. You are in viewing mode
         </v-alert>
 
@@ -247,7 +247,7 @@
                        </tbody>
                     </v-simple-table>
 
-                    <v-btn @click="save_changes()" :loading="progress" color="blue" block dark>Save Changes</v-btn>
+                    <v-btn v-if="auth" @click="save_changes()" :loading="progress" color="blue" block dark>Save Changes</v-btn>
 
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -285,6 +285,7 @@
               error_msg:'',
               success_message:false,
               success_msg:'',
+              auth:false
 
           }
         },
@@ -361,6 +362,7 @@
 
             if(this.$store.state.user.type == 'opd'){
                 this.editing = true;
+                this.auth = true;
 
             }
 

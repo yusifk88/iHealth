@@ -40,4 +40,6 @@ Route::post('vitals/{id}','OPDController@update');
 Route::post('consultance','consultanceController@store');
 Route::post('consultance/{id}','consultanceController@update');
 Route::get('patientbyopd/{id}','patientController@getbyopd');
+Route::post('lab','opdController@savelab');
+Route::post('lab/{id}','opdController@changelab');
 
