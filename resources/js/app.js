@@ -176,7 +176,7 @@ const app = new Vue({
                 },
                 {
                     text:'Dispensary',
-                    icon:'mdi-pil',
+                    icon:'mdi-pill',
                     route:'/dispensary'
                 },
 
@@ -184,6 +184,13 @@ const app = new Vue({
                     text:'OPD',
                     icon:'mdi-book',
                     route:'/opd'
+                },
+
+
+                {
+                    text:'detention',
+                    icon:'mdi-bed',
+                    route:'/detention'
                 },
             ]
         }

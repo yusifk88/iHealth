@@ -9,6 +9,7 @@ use App\OPD;
 use App\Patient;
 use App\Prescrition;
 use App\Sale;
+use App\Ward;
 use Illuminate\Support\ServiceProvider;
 use function foo\func;
 
@@ -50,6 +51,8 @@ class AppServiceProvider extends ServiceProvider
     });
     Consultance::retrieved(function ($c){
         $c->prescription = Prescrition::where('consulting_id',$c->id)->get();
+        $c->ward = Ward::find($c->ward_id);
+
     });
 
 

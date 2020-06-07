@@ -1,6 +1,9 @@
 <template>
     <div>
-        <v-row>
+
+            <v-progress-circular size="120" indeterminate v-if="progress" color="blue"></v-progress-circular>
+
+        <v-row v-else>
             <v-col cols="12" sm="12">
 
                 <v-btn color="blue" text @click="$router.back()"><v-icon>mdi-arrow-left</v-icon>Back</v-btn>
@@ -242,6 +245,12 @@
                         <h3>Consulting Info.</h3>
                     </v-card-text>
                     <v-card-text style="border:1px solid #000">
+                        <h4>Detention Status</h4>
+                        <strong>Status: {{consulting.detained==1 ? 'Detained' : 'Not Detained' }}</strong> <br/>
+                        <strong v-if="consulting.detained ==1">Ward: {{consulting.ward.name}}</strong>
+
+                    </v-card-text>
+                    <v-card-text style="border:1px solid #000">
                         <h3>Patient Complain</h3>
                         <v-card-text class="text-dark" v-html="consulting.complain"></v-card-text>
 
@@ -316,7 +325,8 @@
                 opd:{},
                 patient:{},
                 consulting:{},
-                lab:{}
+                lab:{},
+                progress:false,
 
             }
         },
