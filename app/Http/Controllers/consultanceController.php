@@ -78,6 +78,24 @@ class consultanceController extends Controller
 
     }
 
+    public static function save_prescritions(Request $request,$drugs,$consult_id){
+        foreach ($drugs as $drug)
+        {
+            $prescription = new Prescrition([
+                'user_id'=>$request->user()->id,
+                'opd_id'=>$request->opd_id,
+                'consulting_id'=>$consult_id,
+                'drug_id'=>$drug['drug_id'],
+                'quantity'=>$drug['quantity'],
+                'dosage'=>$drug['dosage'],
+                'dispensed'=>0,
+                'remark'=>''
+            ]);
+            $prescription->save();
+        }
+
+    }
+
     /**
      * Display the specified resource.
      *

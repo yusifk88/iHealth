@@ -11,7 +11,6 @@
                 label="Search"
                 placeholder="Search..."
                 type="search"
-                prepend-inner-icon="search"
             ></v-text-field>
         </v-card-text>
 
@@ -19,6 +18,8 @@
             :items="opd"
             :headers="headers"
             :search="search"
+            :loading="progress"
+
         >
 
 
@@ -28,7 +29,7 @@
 
             </template>
             <template v-slot:item.patient.opd_number="{item}">
-                 <v-btn text small color="blue">{{item.patient.opd_number}}</v-btn>
+                 <v-btn :to="'/opd/'+item.id" text small color="blue">{{item.patient.opd_number}}</v-btn>
 
             </template>
 
@@ -37,12 +38,10 @@
             <template v-slot:item.consulting_status="{item}">
                     <span v-if="item.consulting_status">
                         <v-chip outlined dark small color="green">Processed <v-icon>mdi-check-circle</v-icon></v-chip> <br>
-                        <v-btn small text color="blue">View</v-btn>
                     </span>
 
                 <span v-else>
                         <v-chip outlined dark small color="red">Not Processed <v-icon>mdi-close</v-icon></v-chip><br>
-                        <v-btn small text color="blue">New Consulting</v-btn>
                 </span>
 
             </template>
@@ -52,12 +51,10 @@
             <template v-slot:item.lab_status="{item}">
                     <span v-if="item.lab_status">
                         <v-chip outlined dark small color="green">Processed <v-icon>mdi-check-circle</v-icon></v-chip> <br>
-                        <v-btn small text color="blue">View</v-btn>
                     </span>
 
                 <span v-else>
                         <v-chip outlined dark small color="red">Not Processed <v-icon>mdi-close</v-icon></v-chip><br>
-                        <v-btn small text color="blue">New Lab Record</v-btn>
                 </span>
 
             </template>
@@ -66,12 +63,10 @@
             <template v-slot:item.dispensary_status="{item}">
                     <span v-if="item.dispensary_status">
                         <v-chip outlined dark small color="green">Processed <v-icon>mdi-check-circle</v-icon></v-chip> <br>
-                        <v-btn small text color="blue">View</v-btn>
                     </span>
 
                 <span v-else>
                         <v-chip outlined dark small color="red">Not Processed <v-icon>mdi-close</v-icon></v-chip><br>
-                        <v-btn small text color="blue">New Dispensary Record</v-btn>
                 </span>
 
             </template>
@@ -96,7 +91,7 @@
                     <v-list>
 
                         <v-list-item
-                            @click="edit(item)"
+                            :to="'/opd/'+item.id"
 
                         >
                             <v-list-item-title>View Attendance</v-list-item-title>
@@ -126,7 +121,7 @@
                         </v-list-item>
 
                         <v-list-item
-                            @click="edit(item)"
+                            :to="'/dispensary/'+item.id"
 
                         >
                             <v-list-item-title>Dispensary</v-list-item-title>
@@ -204,15 +199,18 @@
                 },
 
             ],
+                progress:false,
             }
 
         },
         methods:{
 
             get_opd(){
+                this.progress=true;
                 axios.get('/api/attendance')
                     .then(res=>{
                         this.opd = res.data;
+                        this.progress=false;
                     })
             }
         },

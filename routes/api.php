@@ -42,4 +42,5 @@ Route::post('consultance/{id}','consultanceController@update');
 Route::get('patientbyopd/{id}','patientController@getbyopd');
 Route::post('lab','opdController@savelab');
 Route::post('lab/{id}','opdController@changelab');
+Route::post('dispensedrugs','drugsController@dispense');
 

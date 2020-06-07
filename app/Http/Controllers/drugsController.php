@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Drug;
+use App\Prescrition;
+use App\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -62,7 +64,7 @@ class drugsController extends Controller
      */
     public function show($id)
     {
-        
+
 
 
     }
@@ -108,5 +110,48 @@ class drugsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+
+    public function dispense(Request $request){
+        $pres = json_decode($request->prescriptions,true);
+        $other_drugs = json_decode($request->added_drugs,true);
+        if(count($other_drugs)){
+            consultanceController::save_prescritions($request,$other_drugs,$other_drugs[0]['consulting_id']);
+        }
+
+        if (count($pres)){
+            foreach ($pres as $p){
+                $qty = $p['quantity'];
+                $id = $p['id'];
+                DB::statement("update prescription set quantity = '$qty' where id= '$id'");
+
+            }
+
+        }
+
+        $all_prescription = Prescrition::where('opd_id',$request->opd_id)->get();
+        foreach ($all_prescription as $pres){
+            $price = $pres->drug->price;
+
+            $amount = $pres->quantity*$price;
+            $new_quantity = $pres->drug->quantity - $pres->quantity;
+            $drug_id = $pres->drug->id;
+
+            //reduce the drugs by quantity dispensed
+            DB::statement("update drugs set quantity = '$new_quantity' where  id ='$drug_id'");
+
+            $sale = new Sale([
+                'user_id'=>$request->user()->id,
+                'opd_id'=>$request->opd_id,
+                'drug_id'=>$pres->drug->id,
+                'quantity'=>$pres->quantity,
+                'unit_price'=>$pres->drug->price,
+                'amount'=>$amount
+
+            ]);
+            $sale->save();
+        }
     }
 }

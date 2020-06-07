@@ -27,6 +27,8 @@ import newconsultingComponent from "./components/newconsultingComponent";
 import OPDComponent from "./components/partials/OPDComponent";
 import vitalsComponent from "./components/vitalsComponent";
 import labComponent from "./components/partials/labComponent";
+import newdispensaryComponent from "./components/partials/newdispensaryComponent";
+import opdpreviewComponent from "./components/opdpreviewComponent";
 Vue.use(Vuetify);
 Vue.use(Vuex);
 
@@ -109,6 +111,18 @@ const routes = [
         path:'/lab/:id',
         name:'lab',
         component:labComponent,
+        meta: { requiresAuth: false }
+    },
+    {
+        path:'/dispensary/:id',
+        name:'dispensary',
+        component:newdispensaryComponent,
+        meta: { requiresAuth: false }
+    },
+    {
+        path:'/opd/:id',
+        name:'opview',
+        component:opdpreviewComponent,
         meta: { requiresAuth: false }
     },
 ];
@@ -199,4 +213,31 @@ const app = new Vue({
   created() {
         this.check_user();
   }
+});
+
+Vue.filter('currency_symbol',(d)=>{
+
+    if(d < 0){
+        return '-'+"GHS"+d/-1;
+
+    }else{
+
+
+        return "GHS"+d;
+
+    }
+
+
+});
+
+Vue.filter('toMoney',(d)=>{
+    if(d){
+
+
+        return  (Number(d)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+    }else{
+        return '0.00';
+    }
+
 });

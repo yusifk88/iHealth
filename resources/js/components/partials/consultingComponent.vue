@@ -3,55 +3,58 @@
 <div>
 
     <v-alert v-if="edditing" type="warning"><h4>Your are in editing mode, this record already exist</h4></v-alert>
+    <v-alert type="warning" v-show="!auth">
+        Your user role is not allowed to edit this record. You are in viewing mode
+    </v-alert>
     <v-stepper v-model="e1" flat>
         <v-stepper-header>
-            <v-stepper-step editable :complete="e1 > 1" step="1">Patient Complain</v-stepper-step>
+            <v-stepper-step v-if="auth" editable :complete="e1 > 1" step="1">Patient Complain</v-stepper-step>
 
             <v-divider></v-divider>
 
-            <v-stepper-step editable :complete="e1 > 2" step="2">History of Complain</v-stepper-step>
+            <v-stepper-step v-if="auth" editable :complete="e1 > 2" step="2">History of Complain</v-stepper-step>
 
             <v-divider></v-divider>
 
-            <v-stepper-step editable :complete="e1 > 3" step="3">On Direct Questions</v-stepper-step>
+            <v-stepper-step v-if="auth" editable :complete="e1 > 3" step="3">On Direct Questions</v-stepper-step>
 
             <v-divider></v-divider>
 
-            <v-stepper-step editable :complete="e1 > 4" step="4">Post Medical History</v-stepper-step>
-
-
-            <v-divider></v-divider>
-
-            <v-stepper-step editable :complete="e1 > 5" step="5">Drug History</v-stepper-step>
+            <v-stepper-step v-if="auth" editable :complete="e1 > 4" step="4">Post Medical History</v-stepper-step>
 
 
             <v-divider></v-divider>
 
-            <v-stepper-step editable :complete="e1 > 6" step="6">Psychological History</v-stepper-step>
-
-            <v-divider></v-divider>
-
-            <v-stepper-step  editable :complete="e1 > 7" step="7">Family History</v-stepper-step>
-
+            <v-stepper-step v-if="auth" editable :complete="e1 > 5" step="5">Drug History</v-stepper-step>
 
 
             <v-divider></v-divider>
 
-            <v-stepper-step editable :complete="e1 > 8" step="8">OBS/Gynecological History</v-stepper-step>
+            <v-stepper-step v-if="auth" editable :complete="e1 > 6" step="6">Psychological History</v-stepper-step>
+
+            <v-divider></v-divider>
+
+            <v-stepper-step v-if="auth"  editable :complete="e1 > 7" step="7">Family History</v-stepper-step>
+
 
 
             <v-divider></v-divider>
 
-            <v-stepper-step editable :complete="e1 > 9" step="9">Review of Systems</v-stepper-step>
+            <v-stepper-step v-if="auth" editable :complete="e1 > 8" step="8">OBS/Gynecological History</v-stepper-step>
 
 
             <v-divider></v-divider>
-            <v-stepper-step editable :complete="e1 > 10" step=10>Diagnosis</v-stepper-step>
+
+            <v-stepper-step v-if="auth" editable :complete="e1 > 9" step="9">Review of Systems</v-stepper-step>
+
+
+            <v-divider></v-divider>
+            <v-stepper-step v-if="auth" editable :complete="e1 > 10" step=10>Diagnosis</v-stepper-step>
              <v-divider></v-divider>
-            <v-stepper-step :complete="e1 > 11" step="11">Prescription Plan</v-stepper-step>
+            <v-stepper-step v-if="auth" :complete="e1 > 11" step="11">Prescription Plan</v-stepper-step>
 
             <v-divider></v-divider>
-            <v-stepper-step editable :complete="e1 > 12" step="12">Preview & Submit</v-stepper-step>
+            <v-stepper-step v-if="auth" editable :complete="e1 > 12" step="12">Preview & Submit</v-stepper-step>
 
 
         </v-stepper-header>
@@ -662,7 +665,7 @@
 
                                     </v-alert>
 
-                                    <v-btn dark color="green" block :loading="progress" @click="save_consulting">Save {{edditing ? 'Changes':''}}</v-btn>
+                                    <v-btn v-if="auth" dark color="green" block :loading="progress" @click="save_consulting">Save {{edditing ? 'Changes':''}}</v-btn>
 
 
                             </v-card-text>
@@ -712,6 +715,7 @@
                 other_drugs:'',
                 id:null,
                 edditing:false,
+                auth:false,
 
 
             }
@@ -861,6 +865,13 @@
 
         },
         mounted(){
+            if(this.$store.state.user.type == 'consulting'){
+                this.auth = true;
+
+            }else {
+                this.e1=12;
+
+            }
 
             this.get_wards();
             this.get_drugs();
