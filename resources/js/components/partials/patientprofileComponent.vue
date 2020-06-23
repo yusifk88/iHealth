@@ -143,8 +143,6 @@
 
         <v-expansion-panels :value=0 >
             <v-expansion-panel
-
-
             >
                 <v-expansion-panel-header class="text-primary">View Vitals</v-expansion-panel-header>
                 <v-expansion-panel-content>

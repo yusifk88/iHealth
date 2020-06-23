@@ -34,6 +34,8 @@
                 v-model="drawer"
                 app
                 clipped
+                v-if="initialised"
+                v-show="$store.state.loged_in"
             >
                 <v-list dense>
                     <v-list-item v-for="nav in navs" :to="nav.route">
@@ -51,9 +53,62 @@
             <v-app-bar
                 app
                 clipped-left
+                v-if="initialised"
+                v-show="$store.state.loged_in"
+
             >
                 <v-app-bar-nav-icon @click.stop="drawer = !drawer;"></v-app-bar-nav-icon>
                 <v-toolbar-title class="text-primary">iHealth</v-toolbar-title>
+
+                <v-spacer>
+                </v-spacer>
+                <v-menu
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :nudge-width="200"
+                    offset-x
+                    transition="slide-y-transition"
+                >
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                            color="indigo"
+                            dark
+                            v-bind="attrs"
+                            v-on="on"
+                            text
+                        >
+                            @{{$store.state.user.name}}
+                        </v-btn>
+                    </template>
+
+                    <v-card>
+                        <v-list>
+                            <v-list-item>
+                                <v-list-item-avatar>
+                                    <img src="/img/photo.png" alt="User photo">
+                                </v-list-item-avatar>
+
+                                <v-list-item-content>
+                                    <v-list-item-title>@{{$store.state.user.name}}</v-list-item-title>
+                                    <v-list-item-subtitle>@{{$store.state.user.type}}</v-list-item-subtitle>
+                                </v-list-item-content>
+
+                            </v-list-item>
+                        </v-list>
+
+                        <v-divider></v-divider>
+
+                        <v-list rounded>
+                            <v-list-item class="border text-primary border-1" @click="logout_dialog=true">
+
+                                <v-list-item-title class="text-center text-danger">Logout</v-list-item-title>
+                            </v-list-item>
+
+                        </v-list>
+
+                    </v-card>
+                </v-menu>
+
             </v-app-bar>
 
             <v-content>
@@ -61,9 +116,20 @@
                     fluid
                 >
 
+                    <v-dialog width="500px" v-model="logout_dialog">
+                        <v-card>
+                            <v-card-text class="pt-5">
+                                <h2>Do you want to logout?</h2>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="red" :loading="logout_progress" @click="logout()" text>Logout</v-btn>
+                            </v-card-actions>
+                        </v-card>
+
+                    </v-dialog>
+
                     <router-view></router-view>
-
-
 
                 </v-container>
             </v-content>

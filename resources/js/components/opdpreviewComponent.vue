@@ -173,7 +173,7 @@
                                 <td>Temperature</td>
 
                                 <td>
-                                    {{opd.temperature}}<v-icon>mdi-temperature-celsius</v-icon>
+                                    {{opd.temperature}}<v-icon small>mdi-temperature-celsius</v-icon>
 
                                 </td>
 
@@ -313,6 +313,81 @@
 
                 </v-card>
             </v-col>
+
+
+
+
+            <v-col cols="12" sm="12"  v-if="notes.length>0">
+                <v-card flat >
+                    <v-card-text>
+                        <h3>Nurses Notes</h3>
+                    </v-card-text>
+                    <v-card-text style="border:1px solid #000">
+
+                        <v-simple-table >
+                            <thead>
+                            <tr>
+                                <th>DateTime</th>
+                                <th>Note</th>
+                                <th>Nurse</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="note in notes">
+                                <td>
+                                    {{note.created_at}}
+                                </td>
+                                <td v-html="note.note">
+
+                                </td>
+                                <td>{{note.nurse.name}}</td>
+
+
+                            </tr>
+
+                            </tbody>
+                        </v-simple-table>
+
+                    </v-card-text>
+
+                </v-card>
+            </v-col>
+
+
+            <v-col cols="12" sm="12"  v-if="temp_list.length>0">
+                <v-card flat >
+                    <v-card-text>
+                        <h3>Temperature Records</h3>
+                    </v-card-text>
+                    <v-card-text style="border:1px solid #000">
+
+                        <v-simple-table>
+                            <thead>
+                            <tr>
+                                <th>Value</th>
+                                <th>Date/Time</th>
+                                <th>Remark</th>
+                                <th>Nurse</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="tem in temp_list">
+                                <td>{{tem.temperature}} <v-icon small>mdi-temperature-celsius</v-icon></td>
+                                <td>{{tem.created_at}}</td>
+                                <td>{{tem.remark}}</td>
+                                <td>{{tem.nurse.name}}</td>
+
+                            </tr>
+
+                            </tbody>
+                        </v-simple-table>
+
+                    </v-card-text>
+
+                </v-card>
+            </v-col>
+
+
         </v-row>
     </div>
 </template>
@@ -327,6 +402,8 @@
                 consulting:{},
                 lab:{},
                 progress:false,
+                notes:[],
+                temp_list:[]
 
             }
         },
@@ -335,9 +412,12 @@
                 this.progress=true;
                 axios.get('/api/opd/'+this.$route.params.id)
                     .then(res=>{
+                        this.opd = res.data;
+                        this.notes = res.data.nursesnotes;
+                        this.temp_list = res.data.temperatuersheets;
+
                         if(res.data.dispensary_status){
                             this.editing = true;
-                            this.opd = res.data;
                             this.patient = res.data.patient;
                             this.consulting = res.data.consulting;
                             this.lab = res.data.lab;

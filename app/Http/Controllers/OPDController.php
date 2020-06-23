@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Consultance;
+use App\DrugSheet;
 use App\Lab;
+use App\NuresesNote;
 use App\OPD;
+use App\TemperatuerSheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,6 +23,7 @@ class OPDController extends Controller
         $opd = OPD::all();
 
         return response()->json($opd);
+
     }
 
     /**
@@ -119,6 +124,117 @@ class OPDController extends Controller
     public function changelab(Request $request, $id){
 
         DB::statement("update lab set tests='$request->tests',results='$request->results' where id = '$id'");
+
+
+    }
+
+
+    public function detention(){
+
+        $list = OPD::whereIn('id',Consultance::select('opd_id')->where('detained',1))->get();
+
+            return response()->json($list);
+    }
+
+
+    public function savetemp(Request $request){
+        $temp = new TemperatuerSheet([
+            'temperature'=>$request->temperatiure,
+            'remark'=>$request->remark,
+            'time'=>$request->time,
+            'staff_id'=>$request->user()->id,
+            'attendance_id'=>$request->attendance_id
+        ]);
+        $temp->save();
+        return response()->json($temp);
+
+    }
+
+
+    public function templist($id){
+
+        $temp = TemperatuerSheet::where('attendance_id',$id)
+
+                                ->orderBy('created_at','desc')
+                                ->get();
+
+        return response()->json($temp);
+
+    }
+
+    public function gettempgraph($id){
+
+        $graph = [];
+        $dates = DB::select("select distinct(created_at) from temperaturesheets where attendance_id = '$id'");
+        foreach ($dates as $date) {
+            $date->temprature = DB::select("select temperature from temperaturesheets where attendance_id = '$id' and created_at='$date->created_at'")[0]->temperature;
+           array_push($graph,$date);
+
+        }
+        return response()->json($graph);
+
+
+
+    }
+
+
+    public function deletetemp($id){
+
+        TemperatuerSheet::find($id)->delete();
+
+    }
+
+    public function savenursesnote(Request $request){
+
+
+        $note = new NuresesNote([
+            'staff_id'=>$request->user()->id,
+            'note'=>$request->note,
+            'attendance_id'=>$request->attendance_id
+        ]);
+        $note->save();
+
+    }
+
+    public function getnursesnote($id){
+
+        $notes = NuresesNote::where('attendance_id',$id)->orderBy('created_at','desc')->get();
+        return response()->json($notes);
+
+    }
+
+    public function deletenursesnote($id){
+
+        NuresesNote::find($id)->delete();
+
+    }
+
+    public function savedrugsheet(Request $request){
+
+            $drugsheet = new DrugSheet([
+                'staff_id'=>$request->user()->id,
+                'attendance_id'=>$request->attendance_id,
+                'drug_name'=>$request->drug_name,
+                'remark'=>$request->remark
+            ]);
+
+            $drugsheet->save();
+    }
+
+    public function drugsheet($id){
+        $drugs = DrugSheet::where('attendance_id',$id)->orderBy('created_at','desc')->get();
+        return response()->json($drugs);
+    }
+
+    public function deletedrugshet($id){
+        DrugSheet::find($id)->delete();
+    }
+
+    public function patientattendance($id){
+
+       $attendance =  OPD::where('patient_id',$id)->orderBy('created_at','desc')->get();
+
+       return response()->json($attendance);
 
 
     }

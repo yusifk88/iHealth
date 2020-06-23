@@ -4,10 +4,20 @@
 
         <v-row>
             <v-col cols="12" sm="4" class="mx-auto">
+
+                <v-alert
+                    icon="mdi-shield-lock-outline"
+                    prominent
+                    text
+                    type="info"
+                    class="text-center"
+                >
+                    <h2>WELCOME BACK</h2>
+                    Please login to continue
+                </v-alert>
+
+
                 <v-card>
-                    <v-card-title>
-                        <v-icon>mdi-account</v-icon> Login
-                    </v-card-title>
                     <v-card-text>
 
                         <v-text-field
@@ -33,7 +43,6 @@
                         </v-text-field>
 
                         <v-btn @click="login" :loading="progress" color="blue" block dark>Login</v-btn>
-                        <v-btn @click="logout" :loading="progress" color="blue" block dark>Login</v-btn>
 
                     </v-card-text>
 
@@ -56,6 +65,12 @@
                 password:''
 
             }
+        },
+        created() {
+          if (this.$store.state.loged_in){
+              this.$router.back();
+          }
+
         },
         methods:{
             logout(){

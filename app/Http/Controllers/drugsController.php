@@ -154,4 +154,11 @@ class drugsController extends Controller
             $sale->save();
         }
     }
+
+    public function sales(){
+
+        $sales = Sale::orderBy('created_at','desc')->get();
+        return response()->json($sales);
+
+    }
 }

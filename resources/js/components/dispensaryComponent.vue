@@ -1,13 +1,13 @@
 <template>
-    
+
 <div>
 
 <v-card>
     <v-tabs
       v-model="tab"
       centered
-      
-      
+
+
     >
       <v-tabs-slider></v-tabs-slider>
 
@@ -16,16 +16,16 @@
       </v-tab>
 
       <v-tab href="#sales">
-        
+
         Sales
 
       </v-tab>
-     
+
     </v-tabs>
 
     <v-tabs-items v-model="tab">
       <v-tab-item
-       
+
         value="drugs"
       >
         <v-card flat>
@@ -67,7 +67,7 @@
                         </template>
 
                         <v-list>
-                            
+
                             <v-list-item
                                 @click="edit(item)"
 
@@ -76,7 +76,7 @@
                             </v-list-item>
 
 
-                        
+
 
                         </v-list>
                     </v-menu>
@@ -109,11 +109,13 @@
 
 
         <v-tab-item
-       
+
         value="sales"
       >
         <v-card flat>
-          <v-card-text><h1>sales</h1></v-card-text>
+          <v-card-text>
+              <salesComponent></salesComponent>
+          </v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -149,8 +151,6 @@
                             type="number"
                             outlined=""
                             :rules="[rules.required]"
-
-
 
                             ></v-text-field>
 
@@ -202,7 +202,7 @@
               <v-btn @click="save_drug()" :loading="progress" color="blue" text>Save {{editting ? 'Changes':''}}</v-btn>
               <v-btn text @click="add_dialog=false">cancel</v-btn>
           </v-card-actions>
-      
+
       </v-card>
 
 
@@ -228,8 +228,10 @@
 </template>
 
 <script>
+import salesComponent from "./partials/salesComponent";
 export default {
     name:'dispensaryComponent',
+    components: {salesComponent},
     data(){
         return{
             search:'',
@@ -261,14 +263,14 @@ export default {
                         value:'code',
                         text:'Code'
                     } ,
-                  
+
                     {
                     value:'id',
                     text:'Action',
                     align:'center'
 
                   },
-                
+
                 ],
             error_message:false,
             error_msg:'',
@@ -314,7 +316,7 @@ export default {
                     value:'Other',
                     text:'Other'
                 },
-               
+
             ],
             editting:false,
         }
@@ -403,7 +405,7 @@ export default {
                             this.price=0;
                             this.quantity=0;
                             this.get_drugs();
-                            
+
 
 
                 })
@@ -428,6 +430,6 @@ this.get_drugs();
 
 
     }
-    
+
 }
 </script>

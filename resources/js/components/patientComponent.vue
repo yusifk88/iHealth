@@ -36,7 +36,7 @@
 
                 <template v-slot:item.surname="{item}">
 
-                    <v-btn :to="'/patienr/'+item.id" text color="blue" small>{{item.surname+" "+item.other_name}}</v-btn>
+                    <v-btn :to="'/patient/'+item.id" text color="blue" small>{{item.surname+" "+item.other_name}}</v-btn>
 
                 </template>
 
@@ -45,6 +45,7 @@
                         bottom
                         origin="center center"
                         transition="scale-transition"
+                        :disabled="$store.state.user.type !='records'"
                     >
                         <template v-slot:activator="{ on }">
                             <v-btn
@@ -457,11 +458,16 @@
             dark
             bottom
             right
-            fab
+            rounded
+            absolute
             fixed
             @click="add_dialog = !add_dialog; editing = false; clear_fields();"
+            v-if="$store.state.user.type =='records'"
+            style="z-index:9999"
+
         >
-            <v-icon>mdi-plus</v-icon>
+            New <v-icon>mdi-plus</v-icon>
+
         </v-btn>
 
         <v-dialog v-model="delete_dialog" width="500">

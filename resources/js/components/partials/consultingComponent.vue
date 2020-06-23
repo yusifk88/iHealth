@@ -672,9 +672,6 @@
 
                         </v-card>
 
-
-
-
                 </v-stepper-content>
                 <v-btn @click="e1=12" text color="blue">Skip to Review & Submit</v-btn>
 

@@ -29,6 +29,13 @@ import vitalsComponent from "./components/vitalsComponent";
 import labComponent from "./components/partials/labComponent";
 import newdispensaryComponent from "./components/partials/newdispensaryComponent";
 import opdpreviewComponent from "./components/opdpreviewComponent";
+import detentionComponent from "./components/detentionComponent";
+import detentionviewComponent from "./components/partials/detentionviewComponent";
+import Chartkick from 'vue-chartkick'
+import Chart from 'chart.js'
+import patientpreviewComponent from "./components/patientpreviewComponent";
+
+Vue.use(Chartkick.use(Chart));
 Vue.use(Vuetify);
 Vue.use(Vuex);
 
@@ -68,6 +75,12 @@ const routes = [
         component:patientComponent,
         meta: { requiresAuth: true }
     },
+    {
+        path:'/patient/:id',
+        name:'patient',
+        component:patientpreviewComponent,
+        meta: { requiresAuth: true }
+    },
 
     {
         path:'/dispensary',
@@ -91,39 +104,50 @@ const routes = [
         path:'/consulting/:id',
         name:'consulting',
         component:newconsultingComponent,
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
     },
 
     {
         path:'/opd',
         name:'opd',
         component:opdviewComponent,
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
     },
     {
         path:'/vitals/:id',
         name:'vitals',
         component:vitalsComponent,
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
     },
 
     {
         path:'/lab/:id',
         name:'lab',
         component:labComponent,
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
     },
     {
         path:'/dispensary/:id',
         name:'dispensary',
         component:newdispensaryComponent,
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
     },
     {
         path:'/opd/:id',
         name:'opview',
         component:opdpreviewComponent,
-        meta: { requiresAuth: false }
+        meta: { requiresAuth: true }
+    },
+    {
+        path:'/detention',
+        name:'detention',
+        component:detentionComponent,
+        meta: { requiresAuth: true }
+    },
+    {
+        path:'/detention/:id',
+        component:detentionviewComponent,
+        meta: { requiresAuth: true }
     },
 ];
 
@@ -161,8 +185,12 @@ const app = new Vue({
     data(){
 
         return{
+            menu:false,
             drawer:true,
             mini_drawer: true,
+            initialised:false,
+            logout_dialog:false,
+            logout_progress:false,
             navs:[
                 {
                     text:'Dasboard',
@@ -196,16 +224,37 @@ const app = new Vue({
         }
     },
     methods:{
+        logout(){
+            this.logout_progress=true;
+            axios.post('/Authlogout')
+                .then(res=>{
+                    this.logout_progress=false;
+                    this.$store.state.loged_in=false;
+                    this.check_user();
+                    this.$router.push({
+                        path:'/login'
+                    });
+                    this.logout_dialog=false;
+                });
+
+
+
+        },
         check_user(){
+            this.initialised=false;
+
 
             axios.get('/api/user')
                 .then(res=>{
+
+                    this.initialised=true;
 
                     this.$store.state.user = res.data;
                     this.$store.state.loged_in = true;
 
                 })
                 .catch(err=>{
+                    this.initialised=true;
                     this.$store.state.loged_in = false;
                     router.push({path:'/login'});
 
