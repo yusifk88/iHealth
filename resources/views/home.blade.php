@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link href="/css/atlantis.min.css" rel="stylesheet">
 
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -90,7 +91,7 @@
 
                                 <v-list-item-content>
                                     <v-list-item-title>@{{$store.state.user.name}}</v-list-item-title>
-                                    <v-list-item-subtitle>@{{$store.state.user.type}}</v-list-item-subtitle>
+                                    <v-list-item-subtitle class="text-success">@{{$store.state.user.type}}</v-list-item-subtitle>
                                 </v-list-item-content>
 
                             </v-list-item>

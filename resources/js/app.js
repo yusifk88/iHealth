@@ -157,22 +157,7 @@ routes,
 
 });
 
-router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        // this route requires auth, check if logged in
-        // if not, redirect to login page.
-        if (!store.state.loged_in) {
-            next({
-                path: '/login',
-                query: { redirect: to.fullPath }
-            })
-        } else {
-            next()
-        }
-    } else {
-        next() // make sure to always call next()!
-    }
-});
+
 
 
 
@@ -194,7 +179,7 @@ const app = new Vue({
             navs:[
                 {
                     text:'Dasboard',
-                    icon:'mdi-dashboard',
+                    icon:'mdi-apps',
                     route:'/'
                 },
                 {
@@ -216,7 +201,7 @@ const app = new Vue({
 
 
                 {
-                    text:'detention',
+                    text:'Detention',
                     icon:'mdi-bed',
                     route:'/detention'
                 },
@@ -264,6 +249,24 @@ const app = new Vue({
     },
 
     mounted(){
+
+        router.beforeEach((to, from, next) => {
+            if (to.matched.some(record => record.meta.requiresAuth)) {
+                // this route requires auth, check if logged in
+                // if not, redirect to login page.
+                if (!store.state.loged_in) {
+                    next({
+                        path: '/login',
+                        query: { redirect: to.fullPath }
+                    })
+                } else {
+                    next()
+                }
+            } else {
+                next() // make sure to always call next()!
+            }
+        });
+
     },
 
   created() {

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Consultance;
+use App\Drug;
 use App\DrugSheet;
 use App\Lab;
 use App\NuresesNote;
 use App\OPD;
+use App\Patient;
+use App\Sale;
 use App\TemperatuerSheet;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -236,6 +240,42 @@ class OPDController extends Controller
 
        return response()->json($attendance);
 
+
+    }
+
+    public function dashboard(){
+        $last_month = Carbon::now()->subDays(30);
+
+        $data['patients'] = Patient::all()->count();
+        $data['opds'] = OPD::all()->count();
+        $data['detaines'] = OPD::whereIn('id',Consultance::select('opd_id')->where('detained',1))->count();
+        $data['patients_last30'] = Patient::where('created_at','>=',$last_month)->count();
+        $data['opd_last30'] = OPD::where('created_at','>=',$last_month)->count();
+        $data['detained_last30'] = OPD::whereIn('id',Consultance::select('opd_id')->where('detained',1))->where('created_at','>=',$last_month)->count();
+
+        $data['total_drugs'] = Drug::all()->count();
+        $data['total_sales'] = Sale::all()->count();
+        $data['recent_attendance']=OPD::orderBy('created_at','desc')->limit(10)->get();
+
+        $patients_per_month=[];
+        $attendance_per_month=[];
+
+
+        for ($i=1; $i<13; $i++){
+            $patients = Patient::whereMonth('created_at','=',$i)->count();
+            array_push($patients_per_month,$patients);
+
+            $attendance=OPD::whereMonth('created_at','=',$i)->count();
+            array_push($attendance_per_month,$attendance);
+
+        }
+
+        $chart['patients']=$patients_per_month;
+        $chart['attendance']=$attendance_per_month;
+        $data['chart']=$chart;
+
+
+        return response()->json($data);
 
     }
 

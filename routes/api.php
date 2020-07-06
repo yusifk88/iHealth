@@ -56,6 +56,7 @@ Route::post('drugsheet','OPDController@savedrugsheet');
 Route::get('drugsheet/{id}','OPDController@drugsheet');
 Route::delete('drugsheet/{id}','OPDController@deletedrugshet');
 Route::get('patientattendance/{id}','OPDController@patientattendance');
+Route::get('dashboard','OPDController@dashboard');
 
 
 

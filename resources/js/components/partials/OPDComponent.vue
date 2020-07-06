@@ -114,7 +114,7 @@
                 <v-row>
                     <v-col cols="12" sm="2">
                         <v-text-field
-                            type="number"
+                            type="text"
                             label="Blood Pressure"
                             v-model="bp"
                             outlined

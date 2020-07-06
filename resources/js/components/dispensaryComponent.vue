@@ -55,6 +55,7 @@
                         bottom
                         origin="center center"
                         transition="scale-transition"
+                        v-if="$store.state.user.type=='dispensing'"
                     >
                         <template v-slot:activator="{ on }">
                             <v-btn
@@ -100,6 +101,7 @@
             style="z-index:9999"
             fixed
             @click="add_dialog = !add_dialog;"
+            v-if="$store.state.user.type=='dispensing'"
         >
            New Drug <v-icon>mdi-plus</v-icon>
         </v-btn>
