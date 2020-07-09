@@ -12,7 +12,7 @@
                 <a href="/stafflist" class="btn btn-primary btn-link btn-sm">All Staff</a>
                 <a href="/editstaff/{{$staff->id}}" class="btn btn-primary btn-link btn-sm">Edit</a>
                 <a href="/createstaff" class="btn btn-primary btn-link btn-sm">New Staff</a>
-                <button data-toggle="modal" data-target="#deleteModal" class="btn btn-danger btn-link btn-sm">Delete</button>
+                <a href="/resetpassword/{{$staff->id}}" class="btn btn-primary btn-link btn-sm">Reset {{$staff->name}}'s Password</a>
                 </p>
 
             </div>

@@ -5,10 +5,18 @@ namespace App\Http\Controllers;
 use App\Staff;
 use App\Ward;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class staffController extends Controller
 {
+    public  function __construct()
+    {
+        $this->middleware('auth');
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -102,7 +110,10 @@ class staffController extends Controller
              ])->validate();
 
 
-        Staff::find($id)->update($request->all());
+
+        DB::statement("update staff set ward_id = '$request->ward_id',name='$request->name',type='$request->type' where id = '$id'");
+
+
         return redirect('/viewstaff/'.$id)->with('success','Staff ('.$request->name.') was updated successfully');
 
 
@@ -120,5 +131,40 @@ class staffController extends Controller
     {
         Staff::find($id)->delete();
         return redirect('/stafflist')->with('success','Staff deleted');
+    }
+
+
+    public function reset($id){
+
+        $data['staff'] = Staff::find($id);
+
+        return view('staff.resetpassword',$data);
+
+
+
+    }
+
+
+    public function savereset(Request $request, $id){
+        Validator::make($request->all(), [
+
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ])->validate();
+
+
+        $passhash = Hash::make($request->password);
+        DB::statement("update staff set password = '$passhash' where id = '$id' ");
+
+
+        return redirect('/viewstaff/'.$id)->with('success','Password reset was successful');
+
+
+    }
+
+
+    public static function  get_staff($id){
+
+        return Staff::find($id);
+
     }
 }

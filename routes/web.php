@@ -13,13 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 Route::get('createward','wardsController@create');
 Route::post('updateward/{id}','wardsController@update');
 Route::post('saveward','wardsController@store');
@@ -32,5 +30,9 @@ Route::get('stafflist','staffController@index');
 Route::get('viewstaff/{id}','staffController@show');
 Route::get('editstaff/{id}','staffController@edit');
 Route::get('deletestaff/{id}','staffController@destroy');
+Route::get('resetpassword/{id}','staffController@reset');
 Route::post('savestaff','staffController@store');
 Route::post('updatestaff/{id}','staffController@update');
+Route::post('savereset/{id}','staffController@savereset');
+Route::get('records','patientController@index');
+Route::get('attendance','patientController@attedance');

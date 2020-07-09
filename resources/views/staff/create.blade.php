@@ -32,6 +32,8 @@
                     <option value="opd">OPD Attendant</option>
                     <option value="dispensing">Dispensing Officer</option>
                     <option value="consulting">Consulting Officer</option>
+                    <option value="lab">Laboratory</option>
+
                 </select>
 
 

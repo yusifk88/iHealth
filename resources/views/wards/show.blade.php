@@ -49,21 +49,6 @@
             </div>
 
         </div>
-        <div class="card">
-            <div class="card-header border-bottom border-primary">
-                <p class="card-title">
-                <h2>Patients in {{$ward->name}}</h2>
-
-                </p>
-
-            </div>
-            <div class="card-body">
-               <em>comming soon...</em>
-            </div>
-
-        </div>
-
-
 
 
         <div class="modal fade" id="deleteModal" role="dialog" aria-hidden="true" tabindex="1">

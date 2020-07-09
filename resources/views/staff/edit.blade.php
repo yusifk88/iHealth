@@ -29,6 +29,8 @@
                         <option <?=$staff->type == 'opd' ? 'selected':''?> value="opd">OPD Attendant</option>
                         <option <?=$staff->type == 'dispensing' ? 'selected':''?> value="dispensing">Dispensing Officer</option>
                         <option <?=$staff->type == 'consulting' ? 'selected':''?> value="consulting">Consulting Officer</option>
+                        <option <?=$staff->type == 'lab' ? 'selected':''?>  value="lab">Laboratory</option>
+
                     </select>
 
 

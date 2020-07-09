@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Staff;
-use App\Ward;
+use App\OPD;
+use App\Patient;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
-class wardsController extends Controller
+class patientController extends Controller
 {
-    public  function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
-
     }
     /**
      * Display a listing of the resource.
@@ -21,10 +19,8 @@ class wardsController extends Controller
      */
     public function index()
     {
-
-        $data['wards'] = Ward::all();
-
-        return view('wards.index',$data);
+        $data['patients'] = Patient::paginate(50);
+        return view('patient.index',$data);
 
 
     }
@@ -36,7 +32,7 @@ class wardsController extends Controller
      */
     public function create()
     {
-        return view('wards.create');
+        //
     }
 
     /**
@@ -47,16 +43,7 @@ class wardsController extends Controller
      */
     public function store(Request $request)
     {
-
-        Validator::make($request->all(), [
-            'name' => 'required|unique:wards',
-        ])->validate();
-
-        $ward = new Ward($request->all());
-        $ward->save();
-        return redirect()->back()->with('success','Ward Created');
-
-
+        //
     }
 
     /**
@@ -67,13 +54,7 @@ class wardsController extends Controller
      */
     public function show($id)
     {
-        $data['ward'] = Ward::find($id);
-        $data['staff'] = Staff::where('ward_id',$id)->get();
-
-
-        return view('wards.show',$data);
-
-
+        //
     }
 
     /**
@@ -84,12 +65,7 @@ class wardsController extends Controller
      */
     public function edit($id)
     {
-
-        $data['ward'] = Ward::find($id);
-        return view('wards.edit',$data);
-
-
-
+        //
     }
 
     /**
@@ -101,14 +77,7 @@ class wardsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Validator::make($request->all(), [
-            'name' => 'required',
-        ])->validate();
-
-        Ward::find($id)->update($request->all());
-
-        return redirect('/viewward/'.$id)->with('success','Ward updated successfully');
-
+        //
     }
 
     /**
@@ -119,8 +88,22 @@ class wardsController extends Controller
      */
     public function destroy($id)
     {
-        Ward::find($id)->delete();
+        //
 
-        return redirect('/wards')->with('success','Ward Deleted');
     }
+
+
+    public function attedance(){
+
+            $attendance = OPD::orderBY('entry_date','desc')->paginate(50);
+            return view('opd.index',['attendance'=>$attendance]);
+
+    }
+
+    public static function get_patient($id){
+
+        return Patient::find($id);
+
+    }
+
 }

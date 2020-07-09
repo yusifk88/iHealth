@@ -42,7 +42,7 @@
 
             <a href="/"  class="navbar-brand ">
 
-                iHealth
+                iHealth Admin
             </a>
             <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
@@ -64,192 +64,8 @@
             <div class="container-fluid">
 
                 <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-                    <li class="nav-item toggle-nav-search hidden-caret">
-                        <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
-                            <i class="fa fa-search"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown hidden-caret">
-                        <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-envelope"></i>
-                        </a>
-                        <ul class="dropdown-menu messages-notif-box animated fadeIn" aria-labelledby="messageDropdown">
-                            <li>
-                                <div class="dropdown-title d-flex justify-content-between align-items-center">
-                                    Messages
-                                    <a href="#" class="small">Mark all as read</a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="message-notif-scroll scrollbar-outer">
-                                    <div class="notif-center">
-                                        <a href="#">
-                                            <div class="notif-img">
-                                                <img src="/assets/img/jm_denis.jpg" alt="Img Profile">
-                                            </div>
-                                            <div class="notif-content">
-                                                <span class="subject">Jimmy Denis</span>
-                                                <span class="block">
-														How are you ?
-													</span>
-                                                <span class="time">5 minutes ago</span>
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="notif-img">
-                                                <img src="/assets/img/chadengle.jpg" alt="Img Profile">
-                                            </div>
-                                            <div class="notif-content">
-                                                <span class="subject">Chad</span>
-                                                <span class="block">
-														Ok, Thanks !
-													</span>
-                                                <span class="time">12 minutes ago</span>
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="notif-img">
-                                                <img src="/assets/img/mlane.jpg" alt="Img Profile">
-                                            </div>
-                                            <div class="notif-content">
-                                                <span class="subject">Jhon Doe</span>
-                                                <span class="block">
-														Ready for the meeting today...
-													</span>
-                                                <span class="time">12 minutes ago</span>
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="notif-img">
-                                                <img src="/assets/img/talha.jpg" alt="Img Profile">
-                                            </div>
-                                            <div class="notif-content">
-                                                <span class="subject">Talha</span>
-                                                <span class="block">
-														Hi, Apa Kabar ?
-													</span>
-                                                <span class="time">17 minutes ago</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <a class="see-all" href="javascript:void(0);">See all messages<i class="fa fa-angle-right"></i> </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown hidden-caret">
-                        <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-bell"></i>
-                            <span class="notification">4</span>
-                        </a>
-                        <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
-                            <li>
-                                <div class="dropdown-title">You have 4 new notification</div>
-                            </li>
-                            <li>
-                                <div class="notif-scroll scrollbar-outer">
-                                    <div class="notif-center">
-                                        <a href="#">
-                                            <div class="notif-icon notif-primary"> <i class="fa fa-user-plus"></i> </div>
-                                            <div class="notif-content">
-													<span class="block">
-														New user registered
-													</span>
-                                                <span class="time">5 minutes ago</span>
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="notif-icon notif-success"> <i class="fa fa-comment"></i> </div>
-                                            <div class="notif-content">
-													<span class="block">
-														Rahmad commented on Admin
-													</span>
-                                                <span class="time">12 minutes ago</span>
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="notif-img">
-                                                <img src="/assets/img/profile2.jpg" alt="Img Profile">
-                                            </div>
-                                            <div class="notif-content">
-													<span class="block">
-														Reza send messages to you
-													</span>
-                                                <span class="time">12 minutes ago</span>
-                                            </div>
-                                        </a>
-                                        <a href="#">
-                                            <div class="notif-icon notif-danger"> <i class="fa fa-heart"></i> </div>
-                                            <div class="notif-content">
-													<span class="block">
-														Farrah liked Admin
-													</span>
-                                                <span class="time">17 minutes ago</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <a class="see-all" href="javascript:void(0);">See all notifications<i class="fa fa-angle-right"></i> </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown hidden-caret">
-                        <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-                            <i class="fas fa-layer-group"></i>
-                        </a>
-                        <div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
-                            <div class="quick-actions-header">
-                                <span class="title mb-1">Quick Actions</span>
-                                <span class="subtitle op-8">Shortcuts</span>
-                            </div>
-                            <div class="quick-actions-scroll scrollbar-outer">
-                                <div class="quick-actions-items">
-                                    <div class="row m-0">
-                                        <a class="col-6 col-md-4 p-0" href="#">
-                                            <div class="quick-actions-item">
-                                                <i class="flaticon-file-1"></i>
-                                                <span class="text">Generated Report</span>
-                                            </div>
-                                        </a>
-                                        <a class="col-6 col-md-4 p-0" href="#">
-                                            <div class="quick-actions-item">
-                                                <i class="flaticon-database"></i>
-                                                <span class="text">Create New Database</span>
-                                            </div>
-                                        </a>
-                                        <a class="col-6 col-md-4 p-0" href="#">
-                                            <div class="quick-actions-item">
-                                                <i class="flaticon-pen"></i>
-                                                <span class="text">Create New Post</span>
-                                            </div>
-                                        </a>
-                                        <a class="col-6 col-md-4 p-0" href="#">
-                                            <div class="quick-actions-item">
-                                                <i class="flaticon-interface-1"></i>
-                                                <span class="text">Create New Task</span>
-                                            </div>
-                                        </a>
-                                        <a class="col-6 col-md-4 p-0" href="#">
-                                            <div class="quick-actions-item">
-                                                <i class="flaticon-list"></i>
-                                                <span class="text">Completed Tasks</span>
-                                            </div>
-                                        </a>
-                                        <a class="col-6 col-md-4 p-0" href="#">
-                                            <div class="quick-actions-item">
-                                                <i class="flaticon-file"></i>
-                                                <span class="text">Create New Invoice</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+
+
                     <li class="nav-item dropdown hidden-caret">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                             <div class="avatar-sm">
@@ -350,12 +166,12 @@
                         <div class="collapse" id="tables">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <a href="tables/tables.html">
+                                    <a href="/records">
                                         <span class="sub-item">Patients</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="tables/datatables.html">
+                                    <a href="/attendance">
                                         <span class="sub-item">Attendance</span>
                                     </a>
                                 </li>
@@ -383,8 +199,8 @@
     </div>
     <!-- End Sidebar -->
 
-    <div class="main-panel">
-        <div class="content pt-2">
+    <div class="main-panel pt-5">
+        <div class="content pt-5">
 
             <div class="col-md-8 mx-auto">
                 @if ($errors->any())
@@ -475,29 +291,67 @@
     $(document).ready(function () {
 
 
-        $('#staff_table').DataTable( {
+        $('#staff_table').DataTable({
             "pageLength": 5,
             initComplete: function () {
-                this.api().columns().every( function () {
+                this.api().columns().every(function () {
                     var column = this;
                     var select = $('<select class="form-control"><option value=""></option></select>')
-                        .appendTo( $(column.footer()).empty() )
-                        .on( 'change', function () {
+                        .appendTo($(column.footer()).empty())
+                        .on('change', function () {
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
                             );
 
                             column
-                                .search( val ? '^'+val+'$' : '', true, false )
+                                .search(val ? '^' + val + '$' : '', true, false)
                                 .draw();
-                        } );
+                        });
 
-                    column.data().unique().sort().each( function ( d, j ) {
-                        select.append( '<option value="'+d+'">'+d+'</option>' )
-                    } );
-                } );
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
             }
         });
+
+        <?php
+            if(isset($patient_1)){
+            ?>
+
+        var ctx = document.getElementById('statisticsChart').getContext('2d');
+
+        var statisticsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                datasets: [ {
+                    label: "Patients",
+                    borderColor: '#33CE35',
+                    pointBackgroundColor: '#33CE35',
+                    pointRadius: 0,
+                    backgroundColor: '#33CE35',
+                    legendColor: '#33CE35',
+                    fill: true,
+                    borderWidth: 0,
+                    data: [<?=$patient_1?>, <?=$patient_2?>, <?=$patient_3?>, <?=$patient_4?>, <?=$patient_5?>, <?=$patient_6?>, <?=$patient_7?>, <?=$patient_8?>, <?=$patient_9?>, <?=$patient_10?>, <?=$patient_11?>, <?=$patient_12?>]
+                }, {
+                    label: "Attendance",
+                    borderColor: 'rgba(23, 175, 120, 0.6)',
+                    pointBackgroundColor: 'rgba(23, 175, 120, 0.6)',
+                    pointRadius: 2,
+                    backgroundColor: 'rgba(253, 175, 75, 0.4)',
+                    legendColor: 'rgba(23, 175, 120, 0.6)',
+                    fill: true,
+                    borderWidth: 0,
+                    data: [<?=$attend_1?>, <?=$attend_2?>, <?=$attend_3?>, <?=$attend_4?>, <?=$attend_5?>, <?=$attend_6?>, <?=$attend_7?>, <?=$attend_8?>, <?=$attend_9?>, <?=$attend_10?>, <?=$attend_11?>, <?=$attend_12?>]
+                }, ]
+            },
+    });
+
+        <?php
+        }
+        ?>
     });
 </script>
 
