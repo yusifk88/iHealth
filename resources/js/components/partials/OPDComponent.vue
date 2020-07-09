@@ -289,7 +289,6 @@
             save_opd(){
                 if(this.$refs.patient_form.validate())
                 {
-
                     this.progress = true;
 
                     const formdata = new FormData();
