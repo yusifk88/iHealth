@@ -188,16 +188,17 @@ const app = new Vue({
                     route:'/patients'
                 },
                 {
+                    text:'OPD',
+                    icon:'mdi-book',
+                    route:'/opd'
+                },
+                {
                     text:'Dispensary',
                     icon:'mdi-pill',
                     route:'/dispensary'
                 },
 
-                {
-                    text:'OPD',
-                    icon:'mdi-book',
-                    route:'/opd'
-                },
+
 
 
                 {
@@ -226,22 +227,25 @@ const app = new Vue({
 
         },
         check_user(){
-            this.initialised=false;
+            this.$store.state.initializing=true;
 
 
             axios.get('/api/user')
                 .then(res=>{
 
-                    this.initialised=true;
+                    this.$store.state.initializing=false;
 
                     this.$store.state.user = res.data;
                     this.$store.state.loged_in = true;
 
                 })
                 .catch(err=>{
-                    this.initialised=true;
+                    this.$store.state.initializing=false;
                     this.$store.state.loged_in = false;
+
+                    if(this.$route.path !='/login'){
                     router.push({path:'/login'});
+                    }
 
 
                 });

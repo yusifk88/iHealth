@@ -6,6 +6,7 @@ state:{
     loged_in:false,
     user:null,
     patient:null,
+    initializing:false,
 }
 
 

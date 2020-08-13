@@ -3,6 +3,12 @@
         <v-progress-linear indeterminate color="blue" v-if="progress"></v-progress-linear>
 
         <v-row v-else>
+            <v-col cols="12" sm="12">
+                <v-banner class="text-center bg-primary-gradient text-light">
+                    <span style="color:#fff;">Your current role/office: <strong>{{$store.state.user.type}}</strong></span>
+                </v-banner>
+            </v-col>
+
 
             <v-col cols="12" sm="8">
                 <v-row>

@@ -45,7 +45,6 @@
                         bottom
                         origin="center center"
                         transition="scale-transition"
-                        :disabled="$store.state.user.type !='records'"
                     >
                         <template v-slot:activator="{ on }">
                             <v-btn
@@ -67,6 +66,7 @@
 
                             <v-list-item
                                 @click="edit(item)"
+                                v-if="$store.state.user.type =='records'"
 
                             >
                                 <v-list-item-title>Edit</v-list-item-title>
@@ -78,13 +78,14 @@
 
                                 :to="'/admit/'+item.id"
                             >
-                                <v-list-item-title>New Admission</v-list-item-title>
+                                <v-list-item-title>New Attendance</v-list-item-title>
                             </v-list-item>
 
 
                             <v-list-item
                                 @click="delete_patient(item)"
                                 class="text-danger"
+                                v-if="$store.state.user.type =='records'"
 
                             >
                                 <v-list-item-title class="text-danger">Delete</v-list-item-title>
@@ -121,7 +122,12 @@
                             <v-form v-model="formvalid" ref="patient_form" @keyup.native.enter="save_patient">
                                 <v-row>
                                     <v-col cols="12" sm="6">
-                                      <v-chip color="success">OPD#: {{opd_number}}</v-chip>
+                                        <v-text-field
+                                            label="POD #"
+                                            outlined
+                                            v-model="opd_number"
+                                            :rules="[rules.required]"
+                                        ></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="4">
                                         <v-menu
@@ -461,7 +467,7 @@
             rounded
             absolute
             fixed
-            @click="add_dialog = !add_dialog; editing = false; clear_fields();"
+            @click="add_dialog = !add_dialog; editing = false; clear_fields(); get_opd();"
             v-if="$store.state.user.type =='records'"
             style="z-index:9999"
 

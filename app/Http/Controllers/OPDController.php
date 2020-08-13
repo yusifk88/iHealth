@@ -24,7 +24,7 @@ class OPDController extends Controller
      */
     public function index()
     {
-        $opd = OPD::all();
+        $opd = OPD::orderBy('created_at','desc')->get();
 
         return response()->json($opd);
 

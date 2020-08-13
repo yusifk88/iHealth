@@ -44,6 +44,11 @@
 
                         <v-btn @click="login" :loading="progress" color="blue" block dark>Login</v-btn>
 
+                        <v-alert type="error" v-if="error">
+                            {{error_message}}
+
+                        </v-alert>
+
                     </v-card-text>
 
                 </v-card>
@@ -62,7 +67,9 @@
             return{
                 progress:false,
                 email:'',
-                password:''
+                password:'',
+                error:false,
+                error_message:'',
 
             }
         },
@@ -103,8 +110,8 @@
                         });
                     })
                     .catch(error=>{
-                        console.log(error.response);
                         this.progress =false;
+                        console.log(error);
                     })
 
                 });

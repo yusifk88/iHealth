@@ -312,7 +312,7 @@
 
                             this.progress = false;
                             this.$router.push({
-                                path:'/admission/'+res.data.id
+                                path:'/vitals/'+res.data.id
                             })
 
                         })

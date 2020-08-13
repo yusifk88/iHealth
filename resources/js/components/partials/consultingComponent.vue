@@ -1,7 +1,11 @@
 <template>
 
 <div>
+    <v-overlay v-if="progress">
+        <v-progress-circular color="yellow" size="45" indeterminate ></v-progress-circular>
+    </v-overlay>
 
+    <div v-else>
     <v-alert v-if="edditing" type="warning"><h4>Your are in editing mode, this record already exist</h4></v-alert>
     <v-alert type="warning" v-show="!auth">
         Your user role is not allowed to edit this record. You are in viewing mode
@@ -59,9 +63,8 @@
 
         </v-stepper-header>
 
-        <v-progress-circular color="blue" indeterminate v-if="progress" size="45"></v-progress-circular>
 
-        <v-stepper-items v-else>
+        <v-stepper-items>
             <v-stepper-content step="1">
                 <v-card
                     flat
@@ -678,6 +681,8 @@
         </v-stepper-items>
     </v-stepper>
 </div>
+
+</div>
 </template>
 
 <script>
@@ -691,7 +696,6 @@
         data(){
             return{
                 wards:[],
-
                 e1:1,
                 complain:'',
                 complain_history:'',
@@ -714,7 +718,6 @@
                 edditing:false,
                 auth:false,
 
-
             }
         },
         methods:{
@@ -724,7 +727,7 @@
                     .then(res=>{
                         this.progress=false;
                         if(res.data){
-                            this.edditing=true;
+                            this.edditing=res.data.consulting_status;
                             this.complain=res.data.consulting.complain;
                             this.complain_history = res.data.consulting.complain_history;
                             this.questions = res.data.consulting.questions;
@@ -739,7 +742,6 @@
                             this.selected_drugs = res.data.consulting.prescription;
                             this.gynacological_history = res.data.consulting.gynecological_history;
                             this.id = res.data.consulting.id;
-
                         }
 
                     })
@@ -783,8 +785,6 @@
                             .then(res=>{
                                 this.$router.back();
                             })
-
-
 
                     }
 
@@ -835,23 +835,28 @@
                 };
                 this.selected_drugs.push(drug);
 
-
             },
 
             get_drugs(){
+                this.progress=true;
+
                 axios.get('/api/drug')
                     .then(res=>{
                         this.drugs=res.data;
+                        this.progress=false;
+
                     })
                     .catch(error=>{
 
                     });
             },
             get_wards(){
+                this.progress=true;
 
                     axios.get('/api/wards')
                         .then(res=>{
                             this.wards = res.data;
+                            this.progress=false;
 
                         })
                         .catch(error=>{

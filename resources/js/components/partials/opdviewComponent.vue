@@ -122,7 +122,7 @@
 
                         <v-list-item
                             :to="'/dispensary/'+item.id"
-
+                            v-if="item.consulting_status"
                         >
                             <v-list-item-title>Dispensary</v-list-item-title>
                         </v-list-item>

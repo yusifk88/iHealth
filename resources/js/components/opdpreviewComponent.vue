@@ -247,7 +247,7 @@
                     <v-card-text style="border:1px solid #000">
                         <h4>Detention Status</h4>
                         <strong>Status: {{consulting.detained==1 ? 'Detained' : 'Not Detained' }}</strong> <br/>
-                        <strong v-if="consulting.detained ==1">Ward: {{consulting.ward.name}}</strong>
+                        <strong v-if="consulting.detained ==1">Ward: {{consulting.ward ? consulting.ward.name : 'No Ward Selected'}}</strong>
 
                     </v-card-text>
                     <v-card-text style="border:1px solid #000">

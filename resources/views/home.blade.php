@@ -35,8 +35,7 @@
                 v-model="drawer"
                 app
                 clipped
-                v-if="initialised"
-                v-show="$store.state.loged_in"
+                v-if="!$store.state.initializing && $store.state.loged_in"
             >
                 <v-list dense>
                     <v-list-item v-for="nav in navs" :to="nav.route">
@@ -54,8 +53,7 @@
             <v-app-bar
                 app
                 clipped-left
-                v-if="initialised"
-                v-show="$store.state.loged_in"
+                v-if="!$store.state.initializing && $store.state.loged_in"
 
             >
                 <v-app-bar-nav-icon @click.stop="drawer = !drawer;"></v-app-bar-nav-icon>
@@ -130,7 +128,10 @@
 
                     </v-dialog>
 
-                    <router-view></router-view>
+                    <router-view
+                        v-if="!$store.state.initializing"
+
+                    ></router-view>
 
                 </v-container>
             </v-content>

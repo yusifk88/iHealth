@@ -2,8 +2,7 @@
 
 
     <v-row>
-        <v-col cols="12" sm="12">
-
+        <v-col cols="12" sm="12" v-if="$store.state.user.type == 'opd'">
 
     <v-timeline clipped dense>
 
@@ -197,6 +196,16 @@
 
     </v-timeline>
     </v-col>
+
+
+        <v-col cols="12" sm="12" v-else>
+            <v-alert type="error">
+                <h4>Your user role is not allowed to manage OPD</h4>
+            </v-alert>
+
+    </v-col>
+
+
     </v-row>
 
 </template>
