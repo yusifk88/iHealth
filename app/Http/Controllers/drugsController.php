@@ -51,7 +51,6 @@ class drugsController extends Controller
             $data['user_id'] = $request->user()->id;
             $drug = new Drug($data);
             $drug->save();
-            dd($drug);
         }
 
     }
@@ -115,6 +114,7 @@ class drugsController extends Controller
 
 
     public function dispense(Request $request){
+
         $pres = json_decode($request->prescriptions,true);
         $other_drugs = json_decode($request->added_drugs,true);
         if(count($other_drugs)){
@@ -153,6 +153,9 @@ class drugsController extends Controller
             ]);
             $sale->save();
         }
+
+
+
     }
 
     public function sales(){

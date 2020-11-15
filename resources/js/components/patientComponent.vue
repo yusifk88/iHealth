@@ -58,7 +58,7 @@
 
                         <v-list>
                             <v-list-item
-                                :to="'/patienr/'+item.id"
+                                :to="'/patient/'+item.id"
 
                             >
                                 <v-list-item-title>View Patient</v-list-item-title>
@@ -800,6 +800,13 @@
 
                             })
                         .catch(error=>{
+                            if (error.response.status===302){
+                                this.error_msg=error.response.data;
+                            }else {
+                                this.error_msg="Something went wrong, could not save patient";
+                            }
+                            this.error_message=true;
+                            this.progress=false;
 
 
                         });
@@ -828,7 +835,13 @@
                         })
                     .catch(error=>{
 
-
+                        if (error.response.status===302){
+                            this.error_msg=error.response.data;
+                        }else {
+                            this.error_msg="Something went wrong, could not save patient";
+                        }
+                        this.error_message=true;
+                        this.progress=false;
                     });
                     }
 

@@ -1,8 +1,9 @@
 <template>
     <div>
-        <v-card class="text-center">
-            <v-progress-circular color="blue" indeterminate v-if="progress"></v-progress-circular>
-            <v-card-text class="text-left" v-else>
+        <v-progress-circular size="60" color="blue" indeterminate v-if="progress"></v-progress-circular>
+
+        <v-card v-else class="text-center">
+            <v-card-text class="text-left">
                 <v-btn @click="$router.back()" color="blue" text><v-icon>mdi-arrow-left</v-icon>Back</v-btn>
                 <h2 :class="`headline font-weight-light mb-4 blue--text`">Patient Information</h2>
                 <v-chip dark v-if="patient.insured == 1" color="success">Insured</v-chip>
@@ -231,7 +232,7 @@
             </v-card-text>
         </v-card>
 
-        <v-card>
+        <v-card v-if="!progress">
             <v-card-title>
                 Attendance history
             </v-card-title>
@@ -267,7 +268,7 @@
         name: "patientpreviewComponent",
         data(){
             return{
-                progress:false,
+                progress:true,
                 patient:null,
                 attendance:[]
 

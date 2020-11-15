@@ -315,6 +315,7 @@
                                 path:'/vitals/'+res.data.id
                             })
 
+
                         })
                     .catch(error=>{
                         this.progress =false;

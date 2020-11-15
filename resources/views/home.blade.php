@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -35,6 +37,7 @@
                 v-model="drawer"
                 app
                 clipped
+                floating
                 v-if="!$store.state.initializing && $store.state.loged_in"
             >
                 <v-list dense>
@@ -54,6 +57,7 @@
                 app
                 clipped-left
                 v-if="!$store.state.initializing && $store.state.loged_in"
+                elevate-on-scroll
 
             >
                 <v-app-bar-nav-icon @click.stop="drawer = !drawer;"></v-app-bar-nav-icon>

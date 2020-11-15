@@ -282,7 +282,7 @@
                                 <th>Dosage</th>
                             </tr>
                             <tr v-for="(drug,i) in consulting.prescription" :key="i">
-                                <td>{{drug.drug.description}}</td>
+                                <td>{{drug.drug ? drug.drug.description : "Name Not found"}}</td>
                                 <td>{{drug.quantity}}</td>
                                 <td>{{drug.dosage}}</td>
                             </tr>

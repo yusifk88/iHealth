@@ -19,7 +19,7 @@ class CreateOpdTable extends Migration
             $table->unsignedBigInteger('patient_id');
             $table->string('cc_code')->nullable();
             $table->double('temperature');
-            $table->string('bp');
+            $table->string('bp')->nullable();
             $table->double('height')->nullable();
             $table->double('weight');
             $table->string('weight_remarks')->nullable();

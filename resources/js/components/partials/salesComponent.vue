@@ -24,7 +24,7 @@
 
             {{item.unit_price | toMoney | currency_symbol}}
 
-        </template> 
+        </template>
         <template v-slot:item.amount="{item}">
 
             {{item.amount | toMoney | currency_symbol}}
@@ -33,7 +33,11 @@
 
         <template v-slot:item.patient.surname="{item}">
 
-            {{item.patient.surname}} {{item.patient.other_name}}
+            <v-btn text color="blue" :to="'/patient/'+item.patient.id">
+                {{item.patient.surname}} {{item.patient.other_name}}
+
+            </v-btn>
+
 
         </template>
         <template v-slot:item.id="{item}">

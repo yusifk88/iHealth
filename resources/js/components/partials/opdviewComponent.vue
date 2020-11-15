@@ -19,6 +19,7 @@
             :headers="headers"
             :search="search"
             :loading="progress"
+            :items-per-page=50
 
         >
 
@@ -61,7 +62,7 @@
 
 
             <template v-slot:item.dispensary_status="{item}">
-                    <span v-if="item.dispensary_status">
+                    <span v-if="item.sale_status">
                         <v-chip outlined dark small color="green">Processed <v-icon>mdi-check-circle</v-icon></v-chip> <br>
                     </span>
 

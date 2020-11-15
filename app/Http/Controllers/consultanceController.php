@@ -53,6 +53,7 @@ class consultanceController extends Controller
 
             $this->save_drugs($request,$drugs,$consult->id);
 
+
             return response()->json($consult);
 
 
@@ -79,8 +80,10 @@ class consultanceController extends Controller
     }
 
     public static function save_prescritions(Request $request,$drugs,$consult_id){
+        Prescrition::where('consulting_id',$consult_id)->delete();
         foreach ($drugs as $drug)
         {
+
             $prescription = new Prescrition([
                 'user_id'=>$request->user()->id,
                 'opd_id'=>$request->opd_id,

@@ -3,7 +3,7 @@
 
         <patientprofileComponent :attendance-id="$route.params.id" ></patientprofileComponent>
 
-        <v-card>
+        <v-card v-if="!progress">
             <v-card-title>Prescriptions</v-card-title>
             <v-alert type="info">
                 Remove drugs with quantity in stock less than prescribed quantity or
@@ -35,10 +35,10 @@
                 <tr v-for="(drug,i) in prescriptions" :key="i">
                     <td>
 
-                        {{drug.drug.description}}</td>
-                    <td>{{drug.drug.quantity}}</td>
-                    <td>{{drug.drug.price | toMoney | currency_symbol}}</td>
-                    <td>{{Number(drug.drug.price)*Number(drug.quantity) | toMoney | currency_symbol}}</td>
+                        {{drug.drug ? drug.drug.description : "Name not found"}}</td>
+                    <td>{{drug.drug ? drug.drug.quantity : "Not Found"}}</td>
+                    <td>{{drug.drug ? drug.drug.price : 0 | toMoney | currency_symbol}}</td>
+                    <td>{{Number(drug.drug ? drug.drug.price : 0)*Number(drug.quantity) | toMoney | currency_symbol}}</td>
                     <td>
                         <v-text-field
                             type="number"
@@ -58,7 +58,7 @@
                     </v-text-field>
                     </td>
                     <td>
-                        <v-btn icon color="red" @click="remove_drug(i)"><v-icon>mdi-close</v-icon></v-btn>
+                        <v-btn :disabled="!auth" icon color="red" @click="remove_drug(i)"><v-icon>mdi-close</v-icon></v-btn>
                     </td>
 
                 </tr>
@@ -97,6 +97,9 @@
 
 
         </v-card>
+
+
+        <v-progress-circular indeterminate size="60" color="amber" v-if="progress"></v-progress-circular>
         <v-snackbar
             color="error"
             dark
@@ -130,7 +133,7 @@
                 success_message:false,
                 results:'',
                 id:null,
-                progress:false,
+                progress:true,
                 editing:false,
                 auth:false,
                 prescriptions:[],

@@ -44,9 +44,14 @@
 
                         <v-btn @click="login" :loading="progress" color="blue" block dark>Login</v-btn>
 
-                        <v-alert type="error" v-if="error">
-                            {{error_message}}
-
+                        <v-alert
+                            icon="mdi-bug"
+                            prominent
+                            text
+                            type="error"
+                            v-if="error"
+                        >
+                            ERROR:We could not authenticate your credentials please check and try again
                         </v-alert>
 
                     </v-card-text>
@@ -111,7 +116,7 @@
                     })
                     .catch(error=>{
                         this.progress =false;
-                        console.log(error);
+                        this.error=true;
                     })
 
                 });
